@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({ onClick, text }) => {
+const Button = ({ onClick, text }: { onClick: () => void; text: string }) => {
   return (
     <div className='relative py-4'>
       <button className='text-[17px] font-bold border-none cursor-pointer rounded-[0.75em] bg-mytheme-100' onClick={onClick}>

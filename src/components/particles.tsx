@@ -1,11 +1,9 @@
 import React from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim';
 import { loadFull } from 'tsparticles';
-import { ISourceOptions, tsParticles } from '@tsparticles/engine';
 import { options } from './particles/expanding-bubbles';
 
-export function ParticlesContainer(props: unknown) {
+export function ParticlesContainer() {
   const [init, setInit] = React.useState(false);
 
   // this should be run only once per application lifetime
@@ -156,8 +154,9 @@ export function ParticlesContainer(props: unknown) {
   //   }
   // };
   if (!init) return null;
-  const particlesLoaded = container => {
-    console.log(container);
-  };
-  return <Particles options={options} id='tsparticles' particlesLoaded={particlesLoaded}></Particles>;
+  // const particlesLoaded = container => {
+  //   console.log(container);
+  // };
+  return <Particles options={options} id='tsparticles'></Particles>;
+  // particlesLoaded={particlesLoaded}
 }

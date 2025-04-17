@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import Button from './button';
 import { ParticlesContainer } from './particles';
 
-export const GameOver = ({ handleReset }) => {
+export const GameOver = () => {
   const router = useRouter();
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-mytheme-300'>

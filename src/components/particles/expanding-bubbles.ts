@@ -1,4 +1,4 @@
-import { IOptions, ISourceOptions, RecursivePartial } from '@tsparticles/engine';
+import { ISourceOptions } from '@tsparticles/engine';
 
 export const options: ISourceOptions = {
   autoPlay: true,

@@ -17,7 +17,7 @@ type DiscoveredMap = {
 };
 
 const GamePage = () => {
-  const { gameState, setGameState } = useGameState();
+  const { gameState } = useGameState();
 
   const [discoveredCards, setDiscoveredCards] = React.useState<DiscoveredMap>({});
   const [firstFlippedCard, setFirstFlippedCard] = React.useState<number | null>(null);
@@ -71,13 +71,13 @@ const GamePage = () => {
     setCharactersToRender(shuffledCharacters);
   }, [charactersSlice]);
 
-  const handleReset = () => {
-    setDiscoveredCards({});
-    setFirstFlippedCard(null);
-    setCharactersToRender([]);
-    setLocked(false);
-    setGameState(prev => ({ ...prev, difficulty: gameState.difficulty, status: 'welcome' }));
-  };
+  // const handleReset = () => {
+  //   setDiscoveredCards({});
+  //   setFirstFlippedCard(null);
+  //   setCharactersToRender([]);
+  //   setLocked(false);
+  //   setGameState(prev => ({ ...prev, difficulty: gameState.difficulty, status: 'welcome' }));
+  // };
 
   const discoveredArray = Object.values(discoveredCards);
   const [showGameOver, setShowGameOver] = React.useState(false);
@@ -90,7 +90,7 @@ const GamePage = () => {
   }, [discoveredArray.length, charactersToRender.length, discoveredArray]);
 
   if (showGameOver) {
-    return <GameOver handleReset={handleReset} />;
+    return <GameOver />;
   }
 
   return (
