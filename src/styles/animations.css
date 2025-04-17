@@ -1,0 +1,58 @@
+@keyframes borderDraw {
+  0% {
+    clip-path: inset(0 100% 100% 0);
+  }
+  25% {
+    clip-path: inset(0 0 100% 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -100% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-border-draw {
+  position: relative;
+}
+
+.animate-border-draw::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    90deg,
+    rgb(250 204 21) 0%,
+    rgb(234 179 8) 20%,
+    rgb(253 224 71) 40%,
+    rgb(250 204 21) 60%,
+    rgb(234 179 8) 80%,
+    rgb(253 224 71) 100%
+  );
+  background-size: 200% 100%;
+  animation: borderDraw 1s linear forwards, shine 2s linear infinite;
+  z-index: 0;
+}
+
+.animate-border-draw::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(156 163 175); /* bg-gray-400 */
+  border-radius: 0.75rem;
+  z-index: 1;
+}

@@ -30,7 +30,7 @@ export const options: ISourceOptions = {
     zIndex: 0
   },
   detectRetina: true,
-  duration: 1, //seconds
+  duration: 0, //seconds
   fpsLimit: 120,
   interactivity: {
     detectsOn: 'window',
@@ -221,7 +221,7 @@ export const options: ISourceOptions = {
         x: 50,
         y: 50,
         mode: 'percent',
-        radius: 200
+        radius: 1000
       },
       decay: 0,
       distance: {},

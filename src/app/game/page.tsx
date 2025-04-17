@@ -6,6 +6,7 @@ import { characters } from '../../constants';
 import { useGameState } from '../../context/game-context';
 import { calculateBoardSize } from '../../utils';
 import { Character } from '../../interfaces';
+import { GameOver } from '../../components/game-over';
 
 type DiscoveredMap = {
   [key: number]: {
@@ -16,7 +17,7 @@ type DiscoveredMap = {
 };
 
 const GamePage = () => {
-  const { gameState } = useGameState();
+  const { gameState, setGameState } = useGameState();
 
   const [discoveredCards, setDiscoveredCards] = React.useState<DiscoveredMap>({});
   const [firstFlippedCard, setFirstFlippedCard] = React.useState<number | null>(null);
@@ -69,6 +70,28 @@ const GamePage = () => {
     const shuffledCharacters = [...charactersSlice, ...charactersSlice].sort(() => Math.random() - 0.5);
     setCharactersToRender(shuffledCharacters);
   }, [charactersSlice]);
+
+  const handleReset = () => {
+    setDiscoveredCards({});
+    setFirstFlippedCard(null);
+    setCharactersToRender([]);
+    setLocked(false);
+    setGameState(prev => ({ ...prev, difficulty: gameState.difficulty, status: 'welcome' }));
+  };
+
+  const discoveredArray = Object.values(discoveredCards);
+  const [showGameOver, setShowGameOver] = React.useState(false);
+
+  React.useEffect(() => {
+    if (discoveredArray.length === charactersToRender.length && discoveredArray.every(card => card.guessed)) {
+      const timer = setTimeout(() => setShowGameOver(true), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [discoveredArray.length, charactersToRender.length, discoveredArray]);
+
+  if (showGameOver) {
+    return <GameOver handleReset={handleReset} />;
+  }
 
   return (
     <div className='p-4 flex justify-center items-center min-h-screen bg-mytheme-300'>

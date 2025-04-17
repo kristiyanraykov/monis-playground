@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { ParticlesContainer } from './particles';
+import '../styles/animations.css';
 
 const FlippCard = ({
   background,
@@ -22,34 +23,41 @@ const FlippCard = ({
   characterName: string;
   guessed: boolean;
 }) => {
-  // const [isFlipped, setIsFlipped] = React.useState(false);
-  console.log('❗guessed: ', guessed);
-  console.log('❗index: ', index);
+  // const [displayAnimation, setDisplayAnimation] = React.useState(true);
+
+  // React.useEffect(() => {
+  //   if (guessed && displayAnimation) {
+  //     setTimeout(() => {
+  //       setDisplayAnimation(false);
+  //     }, 1000);
+  //   }
+  // }, [guessed, displayAnimation]);
+
   return (
     <div
-      // onClick={() => setIsFlipped(!isFlipped)}
       onClick={() => handleClick(index, characterName)}
-      className={`bg-gray-400 ${isSmall ? 'w-20 h-20' : 'w-36 h-36'} flex items-center justify-center rounded-lg shadow-lg ${!isFlipped ? 'cursor-pointer' : ''}`}
-      // style={{ backgroundColor: background }}
+      className={`relative ${isSmall ? 'w-20 h-20' : 'w-36 h-36'} flex items-center justify-center shadow-lg ${
+        !isFlipped ? 'cursor-pointer' : ''
+      } ${guessed ? 'animate-border-draw' : ''}`}
     >
-      {guessed && <ParticlesContainer />}
+      {/* {displayAnimation && guessed && <ParticlesContainer />} */}
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.8 }}
         style={{
           perspective: 1000,
           transformStyle: 'preserve-3d',
-
           position: 'relative',
-          width: isSmall ? '78px' : '142px',
-          height: isSmall ? '78px' : '142px',
+          width: isSmall ? '80px' : '144px',
+          height: isSmall ? '80px' : '144px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          zIndex: 2
         }}
       >
         <div
-          className={`absolute backface-hidden rotate-y-180 w-full h-full rounded-lg flex items-center justify-center`}
+          className='absolute backface-hidden rotate-y-180 w-full h-full rounded-lg flex items-center justify-center'
           style={{ backgroundColor: background }}
         >
           <Image width={100} height={100} src={imgSrc} alt='back' />

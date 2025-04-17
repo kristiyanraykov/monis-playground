@@ -14,7 +14,7 @@ const HomeScreen = () => {
       <h1 className={'font-title font-bold text-mytheme-100 text-6xl py-24'}>Здравей, Мони!</h1>
       <h3 className={'font-title font-bold text-mytheme-100 text-4xl py-4'}>Избери трудност</h3>
       <GameDifficulty difficulty={gameState.difficulty} />
-      <Button onClick={() => router.push('/game')} />
+      <Button onClick={() => router.push('/game')} text={'Старт!'} />
     </div>
   );
 };
