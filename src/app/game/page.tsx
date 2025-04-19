@@ -94,7 +94,7 @@ const GamePage = () => {
   }
 
   return (
-    <div className='p-4 flex justify-center items-center min-h-screen bg-mytheme-300'>
+    <div className='p-4 w-full h-full scroll-y-none flex justify-center items-center bg-mytheme-300'>
       <div
         className='grid gap-4'
         style={{

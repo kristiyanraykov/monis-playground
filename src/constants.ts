@@ -1,5 +1,7 @@
 import { BoardSize, Character } from './interfaces';
 
+export const DIFFICULTY = 'difficulty';
+
 export const characters: Character[] = [
   { name: 'chase', bg: 'blue', imgSrc: '/chase.webp' },
   { name: 'marshall', bg: 'red', imgSrc: '/marshall.webp' },

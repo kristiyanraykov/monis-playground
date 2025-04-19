@@ -1,6 +1,7 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BoardSize, GameState } from '../interfaces';
+import { DIFFICULTY } from '../constants';
 
 const GameContext = createContext<
   | {
@@ -18,8 +19,20 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     difficulty: '2x2'
   });
 
+  /* avoiding hydration issues loading the difficulty directly from localStorage */
+  useEffect(() => {
+    const savedDifficulty = localStorage.getItem(DIFFICULTY) as BoardSize;
+    if (savedDifficulty) {
+      setGameState(prev => ({ ...prev, difficulty: savedDifficulty }));
+    }
+  }, []);
+
   const setDifficulty = React.useCallback(
-    (boardSize: BoardSize) => setGameState(prev => ({ ...prev, difficulty: boardSize }) as GameState),
+    (boardSize: BoardSize) =>
+      setGameState(prev => {
+        localStorage.setItem(DIFFICULTY, boardSize);
+        return { ...prev, difficulty: boardSize } as GameState;
+      }),
     []
   );
 
